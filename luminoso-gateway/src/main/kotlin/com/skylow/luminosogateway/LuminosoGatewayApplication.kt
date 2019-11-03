@@ -9,18 +9,7 @@ import org.springframework.context.annotation.Bean
 
 @EnableDiscoveryClient
 @SpringBootApplication
-class LuminosoGatewayApplication {
-
-    @Bean
-    fun routeLocator(builder: RouteLocatorBuilder): RouteLocator {
-        return builder.routes()
-            .route("resource") { r ->
-                r.path("/resource")
-                    .uri("lb://resource")
-            }
-            .build()
-    }
-}
+class LuminosoGatewayApplication
 
 fun main(args: Array<String>) {
     runApplication<LuminosoGatewayApplication>(*args)
