@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!-- Spring Oauth2 Schema, see https://github.com/spring-projects/spring-security-oauth/blob/master/spring-security-oauth2/src/test/resources/schema.sql -->
+    <changeSet id="1-api-schema" author="Fabrizio Rodin-Miron">
+        <sql>DROP TYPE IF EXISTS GenderOptions</sql>
+        <sql>CREATE TYPE GenderOptions AS ENUM ('Male','Female','Custom')</sql>
+
+        <sql>DROP TYPE IF EXISTS PaymentOptions</sql>
+        <sql>CREATE TYPE PaymentOptions AS ENUM ('AUCTION','FLAT','ADJUSTABLE')</sql>
+
+        <createTable tableName="account_entity">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="uuid" type="UUID" defaultValue="uuid_generate_v4()" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="account_type" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="artist">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="uuid" type="UUID" defaultValue="uuid_generate_v4()" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="varchar(256)">
+                <constraints nullable="false" unique="true" />
+            </column>
+            <column name="first_name" type="varchar(256)">
+                <constraints nullable="false" />
+            </column>
+            <column name="last_name" type="varchar(256)">
+                <constraints nullable="false" />
+            </column>
+            <column name="email" type="varchar(256)">
+                <constraints nullable="false" unique="true" />
+            </column>
+            <column name="follower_count" type="int" defaultValue="0"/>
+            <column name="bio" type="varchar(512)" />
+            <column name="picture" type="varchar(512)" />
+            <column name="gender" type="GenderOptions" />
+            <column name="updated_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="artist" baseColumnNames="id" constraintName="fk_artist_artist_id"
+                                 referencedTableName="account_entity"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="2-api-schema" author="Fabrizio Rodin-Miron">
+        <createTable tableName="art">
+            <column name="id" type="int"/>
+            <column name="uuid" type="UUID" defaultValue="uuid_generate_v4()" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="varchar(256)">
+                <constraints nullable="false" />
+            </column>
+            <column name="date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dimensions" type="varchar(256)"/>
+            <column name="height" type="varchar(256)"/>
+            <column name="width" type="varchar(256)"/>
+            <column name="thumbnail" type="varchar(256)"/>
+            <column name="url" type="varchar(256)"/>
+            <column name="updated_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="art_artist">
+            <column name="art_id" type="int"/>
+            <column name="artist_id" type="int"/>
+        </createTable>
+        <createTable tableName="art_types">
+            <column name="id" type="int" autoIncrement="true"/>
+            <column name="uuid" type="UUID" defaultValue="uuid_generate_v4()" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(256)"/>
+            <column name="updated_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="art_payment">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="uuid" type="UUID" defaultValue="uuid_generate_v4()" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="art_id" type="int"/>
+            <column name="accepted_option" type="PaymentOptions"/>
+            <column name="updated_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="3-api-schema" author="Fabrizio Rodin-Miron">
+        <createTable tableName="organizations">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="admin_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uuid" type="UUID" defaultValue="uuid_generate_v4()" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="organizations" baseColumnNames="id"
+                                 constraintName="fk_organizations_account_id"
+                                 referencedTableName="account_entity"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="organizations" baseColumnNames="admin_id"
+                                 constraintName="fk_organizations_artist_id"
+                                 referencedTableName="artist"
+                                 referencedColumnNames="id"/>
+
+        <createTable tableName="artist_organization">
+            <column name="artist_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="organization_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <addForeignKeyConstraint baseTableName="artist_organization" baseColumnNames="artist_id"
+                                 constraintName="fk_artist_organization_artist_id"
+                                 referencedTableName="artist"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="artist_organization" baseColumnNames="organization_id"
+                                 constraintName="fk_artist_organization_organization_id"
+                                 referencedTableName="organizations"
+                                 referencedColumnNames="id"/>
+        <createTable tableName="analytics">
+            <column name="account_id" type="int">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="uuid" type="UUID" defaultValue="uuid_generate_v4()" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <addForeignKeyConstraint baseTableName="analytics" baseColumnNames="account_id"
+                                 constraintName="fk_analytics_account_entity_id"
+                                 referencedTableName="account_entity"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    
+</databaseChangeLog>

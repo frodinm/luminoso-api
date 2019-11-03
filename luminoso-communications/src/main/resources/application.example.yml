@@ -1,0 +1,29 @@
+server:
+  port: 0
+spring:
+  application:
+    name: luminoso-communications
+  cloud:
+    consul:
+      discovery:
+        service-name: ${spring.application.name}
+        instance-id: ${spring.application.name}:${random.value}
+  zipkin:
+    service:
+      name: ${spring.application.name}
+  mail:
+    protocol: smtp
+    host: smtp.mailtrap.io
+    port: 2525
+    username:  # Requires creds
+    password:
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG

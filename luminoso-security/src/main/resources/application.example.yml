@@ -1,0 +1,100 @@
+server:
+  port: 8989
+  http2:
+    enabled: true
+  ssl:
+    enabled: false
+    key-store-type: PKCS12
+    key-store: classpath:keystore/zuccini.p12
+    key-password: secret
+    key-alias: zuccini
+    key-store-password: secret
+spring:
+  application:
+    name: luminoso-security
+  cloud:
+    consul:
+      discovery:
+        service-name: ${spring.application.name}
+        instance-id: ${spring.application.name}:${random.value}
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 954101813223-qr56a8s0r0gs1afljd5livhrdh9s1bki.apps.googleusercontent.com
+            clientSecret: x7DMEe5fXAOXikqn7gdUp9tJ
+            scope:
+              - email
+              - profile
+          facebook:
+            clientId: 701663576972658
+            clientSecret: c13cd06d5f525e559277afc9b99d47eb
+            scope:
+              - email
+              - public_profile
+        provider:
+          facebook:
+            authorizationUri: https://www.facebook.com/v3.0/dialog/oauth
+            tokenUri: https://graph.facebook.com/v3.0/oauth/access_token
+            userInfoUri: https://graph.facebook.com/v3.0/me?fields=id,first_name,middle_name,last_name,name,email,verified,is_verified,picture.width(250).height(250)
+    user:
+      password: admin
+      name: admin
+  jmx:
+    enabled: false
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+  liquibase:
+    change-log: classpath:/db/liquidbase-changelog.xml
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+        format_sql: true
+    show-sql: true
+luminoso:
+  oauth2:
+    web:
+      clientId: 3d72f001-60be-48f5-ba12-57520950fc6b
+      clientSecret: MjhkMzc1ODEtODMzYS00NWE5LWFlYTktMDFjYjYxYTI1NDRk
+      scope:
+        - read_profile
+        - update_profile
+      # After successfully authenticating with the OAuth2 Provider,
+      # we'll be generating an auth token for the userEntity and sending the token to the
+      # redirectUri mentioned by the frontend client in the /oauth2/authorize request.
+      # We're not using cookies because they won't work well in mobile clients.
+      authorizedRedirectUris:
+        - https://localhost:3000/oauth2/redirect
+        - myandroidapp://oauth2/redirect
+        - myiosapp://oauth2/redirect
+    admin-web:
+      clientId: 302a4c05-82ca-4c38-9354-6ba720b1907d
+      scope:
+        - create_profile
+        - read_profile
+        - update_profile
+        - delete_profile
+      authorizedRedirectUris:
+        - https://localhost:3000/oauth2/redirect
+  auth:
+    tokenExpirationMsec: 864000000 # 10 days
+  mail:
+    support-email: support@zuccini.io
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+        jdbc:
+          core: TRACE
