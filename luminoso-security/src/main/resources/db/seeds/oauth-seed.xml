@@ -31,10 +31,19 @@
         </insert>
 
         <insert tableName="oauth_client_details">
+            <column name="client_id">29300ead-cb16-4d49-84a9-141c07d46f66</column>
+            <column name="client_secret">{noop}</column>
+            <column name="scope">read_profile,update_profile</column>
+            <column name="access_token_validity">3600</column>
+            <column name="refresh_token_validity">864000000</column>
+            <column name="resource_ids">oauth2-resource</column>
+            <column name="authorized_grant_types">password,refresh_token</column>
+            <column name="additional_information">{"description":"IOS client"}</column>
+        </insert>
+
+        <insert tableName="oauth_client_details">
             <column name="client_id">a6fc4516-6d8c-4996-bb00-34129ccb089a</column>
             <column name="client_secret">{bcrypt}$2a$12$RRe5HHpN49HWacSHSyLGA.lcKmrouHhk1Kw0KKMcOQao8Wj201wL2</column>
-            <column name="web_server_redirect_uri"></column>
-            <column name="scope"></column>
             <column name="access_token_validity">3600</column>
             <column name="refresh_token_validity">864000000</column>
             <column name="resource_ids">oauth2-resource</column>

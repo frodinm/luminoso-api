@@ -1,0 +1,3 @@
+package com.skylow.luminosorealestate.models
+
+class EmptyJsonResponse
