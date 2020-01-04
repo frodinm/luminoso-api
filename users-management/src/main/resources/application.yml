@@ -1,0 +1,64 @@
+server:
+  port: 0
+spring:
+  http:
+    log-request-details: true
+  application:
+    name: users-management
+  cloud:
+    consul:
+      discovery:
+        service-name: ${spring.application.name}
+        instance-id: ${spring.application.name}:${random.value}
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:9999/auth/realms/master
+        registration:
+          keycloak:
+            client-id: master-realm
+            client-secret: 496b1edf-6f5a-444b-ac1e-12c050236b29
+            authorization-grant-type: client_credentials
+  sleuth:
+    async:
+      enabled: false
+  zipkin:
+    service:
+      name: ${spring.application.name}
+    enabled: true
+    locator:
+      discovery:
+        enabled: true
+  rabbitmq:
+    username: admin
+    password: g*34%zHwQQ#9
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          reactive:
+            function:
+              client:
+                ExchangeFunctions: DEBUG
+        security: DEBUG
+      keycloak: DEBUG
+      apache:
+        catalina: DEBUG
+luminoso:
+  environment:
+    gateway: http://localhost:1000
+  authorization:
+    serverUrl: http://localhost:9999/auth
+    username: admin@luminoso.com
+    password: 2%hDtyKq4Y9h
+    clientId: admin-cli
+  authentication:
+    realm: soullabs

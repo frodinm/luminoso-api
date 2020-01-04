@@ -1,0 +1,36 @@
+server:
+  port: 1000
+spring:
+  application:
+    name: gateway
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: true # Spring cloud load balancer isnt fetching latest instances after restart
+    consul:
+      discovery:
+        service-name: ${spring.application.name}
+        instance-id: ${spring.application.name}:${random.value}
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      metrics:
+        enabled: true
+  sleuth:
+    async:
+      enabled: false
+  zipkin:
+    service:
+      name: ${spring.application.name}
+    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+logging:
+  level:
+    org:
+      springframework: DEBUG

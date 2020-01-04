@@ -1,0 +1,50 @@
+server:
+  port: 0
+spring:
+  application:
+    name: users-management
+  cloud:
+    consul:
+      discovery:
+        service-name: ${spring.application.name}
+        instance-id: ${spring.application.name}:${random.value}
+      host: discovery-service
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://keycloak:8080/auth/realms/users-management/protocol/openid-connect/certs
+          issuer-uri: http://keycloak:8080/auth/realms/users-management
+          public-key-location: client.pub
+  zipkin:
+    service:
+      name: ${spring.application.name}
+    enabled: false
+    base-url: http://zipkin:9411
+  rabbitmq:
+    username: admin
+    password: g*34%zHwQQ#9
+    host: rabbitmq
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+      keycloak: DEBUG
+      apache:
+        catalina: DEBUG
+luminoso:
+  environment:
+    gateway: http://gateway:1000
+  authorization:
+    serverUrl: http://keycloak:8080/auth
+    username: admin@luminoso.com
+    password: 2%hDtyKq4Y9h
+    clientId: admin-cli
+  authentication:
+    realm: users-management

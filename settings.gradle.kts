@@ -5,8 +5,10 @@ pluginManagement {
 }
 rootProject.name = "luminoso-api"
 
-include("luminoso-gateway")
-include("luminoso-security")
-include("luminoso-real-estate")
-include("luminoso-communications")
+include("tcs")
+include("gateway")
+include("users-management")
+include("candidate-management")
+include("communications")
+include("messages")
 

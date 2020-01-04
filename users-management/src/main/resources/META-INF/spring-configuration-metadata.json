@@ -1,0 +1,60 @@
+{
+  "groups" : [
+    {
+      "name": "luminoso.environment",
+      "type": "java.lang.String",
+      "description": "Environment config",
+      "sourceType": "com.luminoso.usersmanagement.properties.EnvProperties"
+    },
+    {
+      "name": "luminoso.authorization",
+      "type": "java.lang.String",
+      "description": "Authorization server config",
+      "sourceType": "com.luminoso.usersmanagement.properties.EnvProperties"
+    },
+    {
+      "name": "luminoso.authentication",
+      "type": "java.lang.String",
+      "description": "Authentication config",
+      "sourceType": "com.luminoso.usersmanagement.properties.EnvProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "luminoso.environment.gateway",
+      "type": "java.lang.String",
+      "description": "Gateway server url",
+      "sourceType": "com.luminoso.usersmanagement.properties.EnvProperties"
+    },
+    {
+      "name": "luminoso.authorization.serverUrl",
+      "type": "java.lang.String",
+      "description": "Keycloak server url",
+      "sourceType": "com.luminoso.usersmanagement.properties.EnvProperties"
+    },
+    {
+      "name": "luminoso.authorization.username",
+      "type": "java.lang.String",
+      "description": "Keycloak admin username",
+      "sourceType": "com.luminoso.usersmanagement.properties.EnvProperties"
+    },
+    {
+      "name": "luminoso.authorization.password",
+      "type": "java.lang.String",
+      "description": "Keycloak admin password",
+      "sourceType": "com.luminoso.usersmanagement.properties.EnvProperties"
+    },
+    {
+      "name": "luminoso.authorization.clientId",
+      "type": "java.lang.String",
+      "description": "Keycloak admin clientId",
+      "sourceType": "com.luminoso.usersmanagement.properties.EnvProperties"
+    },
+    {
+      "name": "luminoso.authentication.realm",
+      "type": "java.lang.String",
+      "description": "Keycloak realm to authenticate users",
+      "sourceType": "com.luminoso.usersmanagement.properties.EnvProperties"
+    }
+  ]
+}

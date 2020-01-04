@@ -1,0 +1,40 @@
+server:
+  port: 0
+  http2:
+    enabled: true
+spring:
+  application:
+    name: tenant-context-service
+  cloud:
+    consul:
+      discovery:
+        service-name: ${spring.application.name}
+        instance-id: ${spring.application.name}:${random.value}
+  zipkin:
+    service:
+      name: ${spring.application.name}
+    enabled: false
+  rabbitmq:
+    listener:
+      simple:
+        auto-startup: false
+      direct:
+        auto-startup: false
+    username: admin
+    password: g*34%zHwQQ#9
+    host: rabbitmq
+  redis:
+    host: tcs-db
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+      keycloak: DEBUG
+      apache:
+        catalina: DEBUG

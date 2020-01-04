@@ -1,0 +1,94 @@
+body {
+    height: 100vh;
+    width: 100vw;
+    background: rgb(0,212,255);
+    background: linear-gradient(126deg, rgba(0,212,255,1) 0%, rgba(211,6,243,1) 100%);
+    background-repeat: no-repeat;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-pf-page {
+    display: flex;
+    height: 50vh;
+    width: 50vw;
+    border-radius: 6px;
+    background-color: #2C304C;
+}
+
+#welcome-title {
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
+
+#kc-page-title {
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    margin: 0vh 0vh 6vh 0vw;
+}
+
+#login-info-panel {
+    flex: 1;
+    background-color: white;
+    margin: 4% 6%;
+}
+
+.card-pf {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0px 20%;
+}
+
+.kc-content {
+    width: 100%;
+}
+
+.kc-content-wrapper {
+    width: 100%;
+}
+
+.kc-form {
+    width: 100%;
+}
+
+.kc-form-wrapper {
+    width: 100%;
+}
+
+#kc-form-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-control {
+    padding: 2vh 0vw;
+    border-radius: 2px;
+    border: none;
+    width: 100%;
+    text-indent: 1vw;
+}
+
+.form-group {
+    margin: 0% 0% 2% 0%;
+    width: 100%;
+}
+
+.kc-feedback-text {
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
+
+#kc-login {
+    padding: 3%;
+    width: 100%;
+    background: rgb(0,212,255);
+    background: linear-gradient(126deg, rgba(0,212,255,1) 0%, rgba(211,6,243,1) 100%);
+    color: white;
+    border: 0;
+    border-radius: 25px;
+}

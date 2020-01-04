@@ -1,0 +1,108 @@
+version: '3'
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - 15672:15672
+      - 5672:5672
+  keycloak:
+    image: jboss/keycloak:8.0.1
+    ports:
+      - "9999:8080"
+    environment:
+      KEYCLOAK_USER: admin@luminoso.com
+      KEYCLOAK_PASSWORD: 2%hDtyKq4Y9h
+      DB_VENDOR: postgres
+      DB_ADDR: keycloak-db
+      DB_USER: admin
+      DB_PASSWORD: admin
+    depends_on:
+      - keycloak-db
+    volumes:
+      - "./realms:/tmp"
+      - "./keycloak-themes:/opt/jboss/keycloak/themes"
+    extra_hosts:
+      - "one:172.17.0.1"
+      - "two:172.17.0.1"
+      - "three:172.17.0.1"
+      - "four:172.17.0.1"
+  keycloak-db:
+    image: postgres:12
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: keycloak
+    ports:
+      - 5433:5432
+    volumes:
+      - ./pgdata/keycloak:/var/lib/postgresql/data
+  zipkin:
+    image: openzipkin/zipkin:2.19
+    environment:
+      STORAGE_TYPE: mem
+      JAVA_OPTS: -Dlogging.level.zipkin=DEBUG
+    ports:
+      - 9411:9411
+  tcs:
+    build: ./tcs
+    depends_on:
+      - gateway
+      - discovery-service
+      - tcs-db
+  tcs-db:
+    image: redis:5.0.7
+    ports:
+      - 6379:6379
+  discovery-service:
+    image: consul:1.6.2
+    restart: always
+    ports:
+      - 8500:8500
+  gateway:
+    build: ./gateway
+    ports:
+      - 1000:1000
+    depends_on:
+      - discovery-service
+  users-management:
+    build: ./users-management
+    ports:
+       - 5005:5005
+    depends_on:
+      - gateway
+      - keycloak
+      - rabbitmq
+      - tcs
+      - discovery-service
+      - zipkin
+  users-management-db:
+    image: postgres:12
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: master
+    ports:
+      - 5434:5432
+    volumes:
+      - ./pgdata/users-management:/var/lib/postgresql/data
+  candidate-management:
+    build: ./candidate-management
+    depends_on:
+      - gateway
+      - keycloak
+      - discovery-service
+      - candidate-management-db
+  candidate-management-db:
+    image: postgres:12
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: master
+    ports:
+      - 5435:5432
+    volumes:
+      - ./pgdata/candidate-management:/var/lib/postgresql/data
+
