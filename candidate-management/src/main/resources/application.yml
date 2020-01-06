@@ -2,7 +2,7 @@ server:
   port: 0
 spring:
   application:
-    name: luminoso-candidate-management
+    name: candidate-management
   cloud:
     consul:
       discovery:
@@ -21,8 +21,9 @@ spring:
     enabled: false
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
+    url: jdbc:postgresql://localhost:5435/master
+    username: admin
+    password: admin
   liquibase:
     change-log: classpath:/db/liquidbase-changelog.xml
 keycloak:

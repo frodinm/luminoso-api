@@ -2,7 +2,7 @@ package com.luminoso.usersmanagement.usecases.messaging.impl
 
 import com.luminoso.usersmanagement.models.messaging.Client
 import com.luminoso.usersmanagement.models.messaging.Tenant
-import com.luminoso.usersmanagement.models.messaging.TenantRealmChannel
+import com.luminoso.usersmanagement.models.messaging.TenantCreatedChannel
 import com.luminoso.usersmanagement.models.pojo.representations.idm.ClientRepresentation
 import com.luminoso.usersmanagement.models.pojo.representations.idm.RealmRepresentation
 import com.luminoso.usersmanagement.properties.EnvProperties
@@ -14,12 +14,12 @@ import reactor.core.publisher.Mono
 @Component
 class TenantMessagingUseCase(
     private val env: EnvProperties,
-    private val tenantRealmChannel: TenantRealmChannel): IMessagingUseCase {
+    private val tenantCreatedChannel: TenantCreatedChannel): IMessagingUseCase {
 
     override fun tenantRealmCreated(payload: Tenant): Mono<Tenant> {
         return Mono.defer {
             val message = MessageBuilder.withPayload(payload).build()
-            tenantRealmChannel.output().send(message)
+            tenantCreatedChannel.output().send(message)
 
             Mono.just(payload)
         }
@@ -28,7 +28,7 @@ class TenantMessagingUseCase(
     override fun tenantClientCreated(payload: Client): Mono<Client> {
         return Mono.defer {
             val message = MessageBuilder.withPayload(payload).build()
-            tenantRealmChannel.output().send(message)
+            tenantCreatedChannel.output().send(message)
 
             Mono.just(payload)
         }

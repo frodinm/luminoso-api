@@ -1,0 +1,39 @@
+server:
+  port: 0
+spring:
+  application:
+    name: website-management
+  cloud:
+    consul:
+      host: discovery-service
+      discovery:
+        service-name: ${spring.application.name}
+        instance-id: ${spring.application.name}:${random.value}
+  zipkin:
+    base-url: http://zipkin:9411
+    service:
+      name: ${spring.application.name}
+    enabled: false
+  rabbitmq:
+    username: admin
+    password: g*34%zHwQQ#9
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://website-management-db:5432/master
+    username: admin
+    password: admin
+  liquibase:
+    change-log: classpath:/db/liquidbase-changelog.xml
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+      keycloak: DEBUG
+      apache:
+        catalina: DEBUG

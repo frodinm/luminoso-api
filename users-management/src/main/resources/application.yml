@@ -19,7 +19,7 @@ spring:
         registration:
           keycloak:
             client-id: master-realm
-            client-secret: 496b1edf-6f5a-444b-ac1e-12c050236b29
+            client-secret: 96ecc752-fd95-4ddf-a48b-8ed45dc1d280
             authorization-grant-type: client_credentials
   sleuth:
     async:

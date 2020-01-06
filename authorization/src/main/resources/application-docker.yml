@@ -1,0 +1,62 @@
+server:
+  port: 8443
+  http2:
+    enabled: true
+  ssl:
+    enabled: true
+    key-store-type: PKCS12
+    key-store: classpath:keystore/keystore.p12
+    key-password: password
+    key-alias: jwt
+    key-store-password: password
+spring:
+  application:
+    name: authorization-service
+  cloud:
+    consul:
+      host: discovery-service
+      discovery:
+        service-name: ${spring.application.name}
+        instance-id: ${spring.application.name}:${random.value}
+  sleuth:
+    async:
+      enabled: false
+  zipkin:
+    base-url: http://zipkin:9411
+    service:
+      name: ${spring.application.name}
+    enabled: true
+  rabbitmq:
+    username: admin
+    password: g*34%zHwQQ#9
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 954101813223-qr56a8s0r0gs1afljd5livhrdh9s1bki.apps.googleusercontent.com
+            clientSecret: x7DMEe5fXAOXikqn7gdUp9tJ
+            scope:
+              - email
+              - profile
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://authorization-db:5432/master
+    username: admin
+    password: admin
+  liquibase:
+    change-log: classpath:/db/liquidbase-changelog.xml
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
+    properties:
+      hibernate.temp.use_jdbc_metadata_defaults: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
