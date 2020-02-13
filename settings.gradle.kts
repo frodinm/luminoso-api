@@ -14,5 +14,4 @@ include("users-management")
 include("candidate-management")
 include("website-management")
 include("communications")
-include("messages")
 

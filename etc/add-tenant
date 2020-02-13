@@ -1,3 +1,0 @@
-#!/bin/sh
-
-curl -H "Content-Type: application/json" http://localhost:8083/tenants -d "{ \"alias\" : \"$1\" }"
