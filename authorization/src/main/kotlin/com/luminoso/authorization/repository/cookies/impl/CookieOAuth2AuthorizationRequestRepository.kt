@@ -41,7 +41,7 @@ class CookieOAuth2AuthorizationRequestRepository(private val cookieSystem: ICook
         if (value != null) {
             cookieSystem.addCookie(response, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME, value, cookieExpireSeconds)
             val redirectUriAfterLogin = request.getParameter(REDIRECT_URI_PARAM_COOKIE_NAME)
-            if (redirectUriAfterLogin.isNotBlank()) {
+            if (redirectUriAfterLogin != null && redirectUriAfterLogin.isNotBlank()) {
                 cookieSystem.addCookie(response, REDIRECT_URI_PARAM_COOKIE_NAME, redirectUriAfterLogin, cookieExpireSeconds)
             }
         }

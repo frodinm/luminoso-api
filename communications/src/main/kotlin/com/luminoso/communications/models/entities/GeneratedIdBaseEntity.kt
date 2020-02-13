@@ -1,5 +1,6 @@
-package com.luminoso.candidatemanagement.models.entities
+package com.luminoso.communications.models.entities
 
+import com.luminoso.communications.models.entities.BaseEntity
 import javax.persistence.*
 
 @MappedSuperclass

@@ -1,4 +1,4 @@
-package com.luminoso.communications.models
+package com.luminoso.communications.models.pojo
 
 import java.util.*
 

@@ -29,7 +29,7 @@ data class UserEntity(
     @JoinTable(name = "user_role", joinColumns = [JoinColumn(name = "user_id")], inverseJoinColumns = [JoinColumn(name = "role_id", referencedColumnName = "id")])
     val roles: MutableSet<RoleEntity> = mutableSetOf()
 
-    @OneToMany(mappedBy = "authUser", cascade = [CascadeType.ALL])
+    @OneToMany(mappedBy = "authUser", cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
     val userAuthProviders: MutableList<UserAuthProvider> = mutableListOf()
 
     @OneToOne(mappedBy = "authUser", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)

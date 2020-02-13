@@ -26,17 +26,6 @@ spring:
     password: admin
   liquibase:
     change-log: classpath:/db/liquidbase-changelog.xml
-keycloak:
-  realm: dev
-  auth-server-url: http://localhost:8080/auth
-  ssl-required: external
-  resource: ${spring.application.name}
-  credentials:
-    secret: 53bc798a-0fc3-4000-b1bf-12f26642ab6a
-  public-client: false
-  verify-token-audience: true
-  use-resource-role-mappings: true
-  principal-attribute: preferred_username
 management:
   endpoints:
     web:

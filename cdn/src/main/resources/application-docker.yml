@@ -1,29 +1,24 @@
 server:
-  port: 1000
+  port: 0
 spring:
   application:
-    name: gateway
+    name: content-delivery-service
   cloud:
-    loadbalancer:
-      ribbon:
-        enabled: false # Spring cloud load balancer isnt fetching latest instances after restart
     consul:
       discovery:
         service-name: ${spring.application.name}
         instance-id: ${spring.application.name}:${random.value}
-      host: discovery-service
-    gateway:
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
-      metrics:
-        enabled: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://authorization:8080/auth/realms/dev/protocol/openid-connect/certs
+          issuer-uri: http://authorization:8080/auth/realms/dev
+          public-key-location: client.pub
   zipkin:
-    base-url: http://zipkin:9411
     service:
       name: ${spring.application.name}
-    enabled: true
+    enabled: false
 management:
   endpoints:
     web:
@@ -32,4 +27,8 @@ management:
 logging:
   level:
     org:
-      springframework: DEBUG
+      springframework:
+        security: DEBUG
+      keycloak: DEBUG
+      apache:
+        catalina: DEBUG

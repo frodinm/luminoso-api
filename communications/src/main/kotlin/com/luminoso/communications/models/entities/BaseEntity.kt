@@ -1,4 +1,4 @@
-package com.luminoso.candidatemanagement.models.entities
+package com.luminoso.communications.models.entities
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import org.hibernate.annotations.UpdateTimestamp

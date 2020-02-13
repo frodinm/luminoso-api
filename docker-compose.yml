@@ -6,24 +6,6 @@ services:
     ports:
       - 15672:15672
       - 5672:5672
-#  keycloak:
-#    image: jboss/keycloak:8.0.1
-#    restart: on-failure
-#    ports:
-#      - "9999:8080"
-#    environment:
-#      KEYCLOAK_IMPORT: /tmp/luminoso-realm.json
-#      KEYCLOAK_USER: admin@luminoso.com
-#      KEYCLOAK_PASSWORD: 2%hDtyKq4Y9h
-#      DB_VENDOR: postgres
-#      DB_ADDR: keycloak-db
-#      DB_USER: admin
-#      DB_PASSWORD: admin
-#    depends_on:
-#      - keycloak-db
-#    volumes:
-#      - "./keycloak/themes:/opt/jboss/keycloak/themes"
-#      - "./keycloak/realms/luminoso-realm.json:/tmp/luminoso-realm.json"
   authorization:
     build: ./authorization
     restart: on-failure
@@ -46,6 +28,24 @@ services:
       - 5433:5432
     volumes:
       - ./pgdata/authorization:/var/lib/postgresql/data
+#  cdn:
+#    build: ./cdn
+#    restart: on-failure
+#    ports:
+#      - 5005:5005
+#    depends_on:
+#      - gateway
+#      - discovery-service
+#      - zipkin
+#      - cdn-db
+#  cdn-db:
+#    image: mongo
+#    restart: on-failure
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: admin
+#      MONGO_INITDB_ROOT_PASSWORD: admin
+#    ports:
+#      - 27017:27017
   zipkin:
     image: openzipkin/zipkin:2.19
     restart: on-failure

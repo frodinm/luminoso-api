@@ -49,7 +49,7 @@ dependencies {
     }
 
     implementation ("io.projectreactor.tools:blockhound:1.0.1.RELEASE")
-    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions:1.0.1.RELEASE")
+    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions:1.0.2.RELEASE")
 
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("org.springframework.amqp:spring-rabbit-test")

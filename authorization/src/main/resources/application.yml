@@ -21,19 +21,24 @@ spring:
     async:
       enabled: false
   zipkin:
+    enabled: false
     service:
       name: ${spring.application.name}
-    enabled: true
   rabbitmq:
     username: admin
     password: g*34%zHwQQ#9
+    listener:
+      direct:
+        auto-startup: false
+      simple:
+        auto-startup: false
   security:
     oauth2:
       client:
         registration:
           google:
-            clientId: 954101813223-qr56a8s0r0gs1afljd5livhrdh9s1bki.apps.googleusercontent.com
-            clientSecret: x7DMEe5fXAOXikqn7gdUp9tJ
+            clientId: 777117467633-eef86h9kmkg4gvh8q3631d2m3j67q6nk.apps.googleusercontent.com
+            clientSecret: UF-PaKRI8tkECGbRfvK7DonJ
             scope:
               - email
               - profile

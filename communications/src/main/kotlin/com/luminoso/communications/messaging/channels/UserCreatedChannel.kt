@@ -1,4 +1,4 @@
-package com.luminoso.authorization.messaging.channels
+package com.luminoso.communications.messaging.channels
 
 import org.springframework.cloud.stream.annotation.Output
 import org.springframework.messaging.SubscribableChannel

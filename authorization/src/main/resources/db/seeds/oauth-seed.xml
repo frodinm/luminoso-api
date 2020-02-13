@@ -15,19 +15,43 @@
             <column name="refresh_token_validity">864000000</column>
             <column name="resource_ids">oauth2-resource</column>
             <column name="authorized_grant_types">authorization_code,password,refresh_token</column>
-            <column name="additional_information">{"description":"Zuccini web app public client"}</column>
+            <column name="additional_information">{"description":"Luminoso web app public client"}</column>
         </insert>
 
         <insert tableName="oauth_client_details">
             <column name="client_id">302a4c05-82ca-4c38-9354-6ba720b1907d</column>
             <column name="client_secret">{noop}</column>
             <column name="web_server_redirect_uri">https://localhost:5000/oauth2/redirect</column>
-            <column name="scope">create_profile,read_profile,update_profile,delete_profile</column>
+            <column name="scope">read_profile,update_profile</column>
             <column name="access_token_validity">3600</column>
             <column name="refresh_token_validity">864000000</column>
             <column name="resource_ids">oauth2-resource</column>
             <column name="authorized_grant_types">password,refresh_token</column>
-            <column name="additional_information">{"description":"Zuccini admin web app public client"}</column>
+            <column name="additional_information">{"description":"Luminoso ios public client"}</column>
+        </insert>
+
+        <insert tableName="oauth_client_details">
+            <column name="client_id">302a4c05-82ca-4c38-9354-6ba720b1907d</column>
+            <column name="client_secret">{noop}</column>
+            <column name="web_server_redirect_uri">https://localhost:5000/oauth2/redirect</column>
+            <column name="scope">read_profile,update_profile</column>
+            <column name="access_token_validity">3600</column>
+            <column name="refresh_token_validity">864000000</column>
+            <column name="resource_ids">oauth2-resource</column>
+            <column name="authorized_grant_types">password,refresh_token</column>
+            <column name="additional_information">{"description":"Luminoso ios public client"}</column>
+        </insert>
+
+        <insert tableName="oauth_client_details">
+            <column name="client_id">302a4c05-82ca-4c38-9354-6ba720b1907d</column>
+            <column name="client_secret">{noop}</column>
+            <column name="web_server_redirect_uri">https://localhost:5000/oauth2/redirect</column>
+            <column name="scope">read_profile,update_profile</column>
+            <column name="access_token_validity">3600</column>
+            <column name="refresh_token_validity">864000000</column>
+            <column name="resource_ids">oauth2-resource</column>
+            <column name="authorized_grant_types">password,refresh_token</column>
+            <column name="additional_information">{"description":"Luminoso ios public client"}</column>
         </insert>
 
         <insert tableName="permission">

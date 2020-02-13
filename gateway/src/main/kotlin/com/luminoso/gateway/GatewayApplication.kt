@@ -26,6 +26,11 @@ class GatewayApplication {
                 r.path("/signup")
                     .filters { f -> f.rewritePath("/signup/", "/users-management/signup")}
                     .uri("lb://users-management")
+            }.route { r ->
+                r.path("/image/**")
+                    .filters { f -> f.rewritePath("/cdn/(?<remaining>.*)", "/\${remaining}")}
+                    .uri("lb://cdn")
+
             }.build()
     }
 

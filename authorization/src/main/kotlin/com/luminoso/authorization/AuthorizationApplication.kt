@@ -1,5 +1,6 @@
 package com.luminoso.authorization
 
+import com.luminoso.authorization.messaging.channels.UserCreatedChannel
 import org.apache.catalina.Context
 import org.apache.catalina.connector.Connector
 import org.apache.tomcat.util.descriptor.web.SecurityCollection
@@ -8,10 +9,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory
+import org.springframework.cloud.stream.annotation.EnableBinding
 import org.springframework.context.annotation.Bean
 import org.springframework.security.crypto.factory.PasswordEncoderFactories
 import org.springframework.security.crypto.password.PasswordEncoder
 
+@EnableBinding(UserCreatedChannel::class)
 @SpringBootApplication
 class AuthorizationApplication {
     @Bean

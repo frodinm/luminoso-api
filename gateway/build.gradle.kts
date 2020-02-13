@@ -25,6 +25,7 @@ dependencies {
 
     implementation("org.springframework.cloud:spring-cloud-loadbalancer")
     implementation("org.springframework.cloud:spring-cloud-starter-consul-discovery")
+    implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j")
 
     // Metrics
     implementation("org.springframework.boot:spring-boot-starter-actuator")

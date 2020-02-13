@@ -25,6 +25,7 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-mail")
     implementation("com.turo:pushy:0.13.10")
+    implementation("com.google.firebase:firebase-admin:6.12.1")
 
     // Metrics
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -35,6 +36,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 
+    implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.8")
     implementation("org.liquibase:liquibase-core")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     runtimeOnly("org.postgresql:postgresql")
@@ -43,15 +45,20 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-consul-discovery")
     implementation("org.springframework.cloud:spring-cloud-starter-zipkin")
 
-    testImplementation("org.springframework.kafka:spring-kafka-test")
+    implementation("org.springframework.cloud:spring-cloud-stream")
+    implementation("org.springframework.boot:spring-boot-starter-amqp")
+    implementation("org.springframework.cloud:spring-cloud-stream-binder-rabbit")
 
     implementation ("io.projectreactor.tools:blockhound:1.0.1.RELEASE")
+    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions:1.0.2.RELEASE")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
     testImplementation("io.projectreactor:reactor-test")
-    testImplementation("org.springframework.kafka:spring-kafka-test")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+    testImplementation("org.springframework.amqp:spring-rabbit-test")
+    testImplementation("org.springframework.cloud:spring-cloud-stream-test-support")
 }
 
 dependencyManagement {

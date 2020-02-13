@@ -8,7 +8,7 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "website_banner")
-data class WebsiteBannerEntity(val title: String, val description: String): GeneratedIdBaseEntity() {
+data class  WebsiteBannerEntity(val title: String, val description: String): GeneratedIdBaseEntity() {
 
     @OneToOne(mappedBy = "banner", fetch = FetchType.EAGER)
     var website: WebsiteEntity? = null

@@ -1,16 +1,14 @@
 package com.luminoso.cdn.controllers
 
-import com.luminoso.usersmanagement.exceptions.UserAlreadyExistException
-import com.luminoso.usersmanagement.models.exception.ApiError
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatus.*
 import org.springframework.http.ResponseEntity
 import org.springframework.http.server.reactive.ServerHttpRequest
 import org.springframework.http.server.reactive.ServerHttpResponse
-import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
+import reactor.core.publisher.Mono
 
 @ControllerAdvice
 class GlobalErrorHandlerController {
@@ -19,7 +17,7 @@ class GlobalErrorHandlerController {
 
     @ExceptionHandler(Exception::class)
     fun handle(ex: Exception,
-               request: ServerHttpRequest, response: ServerHttpResponse): ResponseEntity<ApiError> {
+               request: ServerHttpRequest, response: ServerHttpResponse): Mono<ResponseEntity<Any>> {
 
         logger.error(ex.message, ex)
 
@@ -33,13 +31,11 @@ class GlobalErrorHandlerController {
 
         return when (error) {
             is NullPointerException -> getErrorResponseEntity(ex, BAD_REQUEST)
-            is BadCredentialsException -> getErrorResponseEntity(ex, BAD_REQUEST)
-            is UserAlreadyExistException -> getErrorResponseEntity(ex, CONFLICT)
             else -> getErrorResponseEntity(ex, INTERNAL_SERVER_ERROR)
         }
     }
 
-    private fun getErrorResponseEntity(ex: Exception, httpStatus: HttpStatus): ResponseEntity<ApiError> {
-        return ResponseEntity(ApiError(ex.localizedMessage),httpStatus)
+    private fun getErrorResponseEntity(ex: Exception, httpStatus: HttpStatus): Mono<ResponseEntity<Any>> {
+        return Mono.just(ResponseEntity(httpStatus))
     }
 }

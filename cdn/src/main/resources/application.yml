@@ -2,7 +2,7 @@ server:
   port: 0
 spring:
   application:
-    name: candidate-management
+    name: content-delivery-service
   cloud:
     consul:
       discovery:
@@ -19,24 +19,14 @@ spring:
     service:
       name: ${spring.application.name}
     enabled: false
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5435/master
-    username: admin
-    password: admin
-  liquibase:
-    change-log: classpath:/db/liquidbase-changelog.xml
-keycloak:
-  realm: dev
-  auth-server-url: http://localhost:8080/auth
-  ssl-required: external
-  resource: ${spring.application.name}
-  credentials:
-    secret: 53bc798a-0fc3-4000-b1bf-12f26642ab6a
-  public-client: false
-  verify-token-audience: true
-  use-resource-role-mappings: true
-  principal-attribute: preferred_username
+  data:
+    mongodb:
+      host: localhost
+      port: 4567
+      database: cnd
+      grid-fs-database: assets
+      username: admin
+      password: admin
 management:
   endpoints:
     web:

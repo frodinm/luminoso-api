@@ -6,4 +6,5 @@ import reactor.core.publisher.Mono
 interface IGetUserUseCase {
     fun byId(userId: Int): Mono<UserEntity?>
     fun byEmail(email: String): Mono<UserEntity?>
+    fun byVerificationToken(verificationToken: String): Mono<UserEntity>
 }

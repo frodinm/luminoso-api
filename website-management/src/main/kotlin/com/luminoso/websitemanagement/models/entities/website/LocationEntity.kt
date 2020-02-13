@@ -10,4 +10,5 @@ data class LocationEntity(val city: String, val country: String): GeneratedIdBas
     @OneToMany(mappedBy = "location", fetch = FetchType.EAGER)
     var openings: MutableSet<OpeningEntity> = mutableSetOf()
 
+
 }

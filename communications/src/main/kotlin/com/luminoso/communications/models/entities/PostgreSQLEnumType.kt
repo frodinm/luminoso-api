@@ -1,4 +1,4 @@
-package com.luminoso.candidatemanagement.models.entities
+package com.luminoso.communications.models.entities
 
 import org.hibernate.HibernateException
 import org.hibernate.engine.spi.SharedSessionContractImplementor
