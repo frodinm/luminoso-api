@@ -8,6 +8,9 @@ import com.luminoso.authorization.repository.UserRepository
 import com.luminoso.authorization.models.entities.security.user.UserAuthProvider
 import com.luminoso.authorization.models.entities.security.user.UserEntity
 import com.luminoso.authorization.models.entities.security.VerificationToken
+import com.luminoso.authorization.models.auth.body.RegisterUserBody
+import com.luminoso.authorization.models.entities.security.user.extensions.toUser
+import com.luminoso.authorization.usecases.messaging.impl.SendCreatedUserEvent
 import com.luminoso.authorization.usecases.user.ICreateUserUseCase
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component
@@ -18,9 +21,10 @@ import java.util.*
 @Component
 class CreateUserUseCase(private val userDao: UserRepository,
                         private val roleDao: RoleRepository,
-                        private val passwordEncoder: PasswordEncoder) : ICreateUserUseCase {
+                        private val passwordEncoder: PasswordEncoder,
+                        private val sendCreatedUserEvent: SendCreatedUserEvent) : ICreateUserUseCase {
 
-    override fun email(user: User): Mono<UserEntity> {
+    override fun email(user: RegisterUserBody): Mono<UserEntity> {
         return Mono.fromCallable {
             if (emailExists(user.email)) {
                 throw UserAlreadyExistException("Email is already registered")
@@ -33,8 +37,6 @@ class CreateUserUseCase(private val userDao: UserRepository,
 
             val userEntity = UserEntity(
                 username = user.username,
-                firstName = user.firstName,
-                lastName = user.lastName,
                 password = passwordEncoder.encode(user.password),
                 email = user.email
             )
@@ -46,6 +48,8 @@ class CreateUserUseCase(private val userDao: UserRepository,
             userEntity.addAuthProvider(UserAuthProvider(provider = AuthProvider.EMAIL))
 
             userDao.save(userEntity)
+        }.doOnSuccess {
+            sendCreatedUserEvent.send(it.toUser())
         }.subscribeOn(Schedulers.elastic())
     }
 

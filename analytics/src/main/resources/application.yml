@@ -1,8 +1,17 @@
 server:
   port: 0
+  http2:
+    enabled: true
+  ssl:
+    enabled: false
+    key-store-type: PKCS12
+    key-store: classpath:keystore/keystore.jks
+    key-password: password
+    key-alias: jwt
+    key-store-password: password
 spring:
   application:
-    name: candidate-management
+    name: analytics
   cloud:
     consul:
       discovery:
@@ -10,22 +19,33 @@ spring:
         instance-id: ${spring.application.name}:${random.value}
   security:
     oauth2:
+      client:
+        registration:
+          authorization:
+            client-id: 19828b9c-61aa-4288-8644-fc890187c71e
+            client-secret: e6d5957f3a254bae2d05f31617d94dc68559431c50d3f1ffbf3136b2b5cbfcc7
       resourceserver:
         jwt:
-          jwk-set-uri: http://localhost:8080/auth/realms/dev/protocol/openid-connect/certs
-          issuer-uri: http://localhost:8080/auth/realms/dev
-          public-key-location: client.pub
+          jwk-set-uri: http://localhost:1000/authorization/.well-known/jwks.json
+          issuer-uri: http://localhost:1000/authorization
+  sleuth:
+    async:
+      enabled: false
   zipkin:
+    enabled: true
     service:
       name: ${spring.application.name}
-    enabled: false
+  rabbitmq:
+    username: admin
+    password: g*34%zHwQQ#9
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5435/master
+    url: jdbc:postgresql://localhost:5437/master
     username: admin
     password: admin
   liquibase:
     change-log: classpath:/db/liquidbase-changelog.xml
+    enabled: true
 management:
   endpoints:
     web:

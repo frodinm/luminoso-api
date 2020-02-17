@@ -13,11 +13,11 @@ val snippetsDir by extra { file("build/generated-snippets") }
 extra["springCloudVersion"] = "Hoxton.SR1"
 
 dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
 
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 
-    implementation("org.keycloak:keycloak-spring-boot-starter:6.0.1")
     implementation("org.springframework.security:spring-security-oauth2-resource-server")
     implementation("org.springframework.security:spring-security-oauth2-jose")
     implementation("org.springframework.security:spring-security-config")

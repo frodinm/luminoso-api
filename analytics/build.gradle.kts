@@ -25,6 +25,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
 
     implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.8")
+    implementation("com.vladmihalcea:hibernate-types-52:2.9.3")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.liquibase:liquibase-core")
     runtimeOnly("org.postgresql:postgresql")
@@ -37,6 +38,7 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-stream")
     implementation("org.springframework.cloud:spring-cloud-stream-binder-rabbit")
 
+    implementation("nl.basjes.parse.useragent:yauaa:5.15")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")

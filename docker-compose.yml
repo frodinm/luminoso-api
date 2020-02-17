@@ -28,6 +28,28 @@ services:
       - 5433:5432
     volumes:
       - ./pgdata/authorization:/var/lib/postgresql/data
+  analytics:
+    build: ./analytics
+    restart: on-failure
+    ports:
+      - 5005:5005
+      - 8293:1200
+    depends_on:
+      - gateway
+      - rabbitmq
+      - discovery-service
+      - zipkin
+  analytics-db:
+    image: postgres:12
+    restart: on-failure
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: master
+    ports:
+      - 5437:5432
+    volumes:
+      - ./pgdata/analytics:/var/lib/postgresql/data
 #  cdn:
 #    build: ./cdn
 #    restart: on-failure
@@ -78,6 +100,26 @@ services:
       - 1000:1000
     depends_on:
       - discovery-service
+  communication:
+    build: ./communications
+    restart: on-failure
+    depends_on:
+      - gateway
+      - authorization
+      - zipkin
+      - discovery-service
+      - communication-db
+  communication-db:
+    image: postgres:12
+    restart: on-failure
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: master
+    ports:
+      - 5438:5432
+    volumes:
+      - ./pgdata/cummunication:/var/lib/postgresql/data
   users-management:
     build: ./users-management
     restart: on-failure

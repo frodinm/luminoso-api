@@ -17,6 +17,9 @@ spring:
           keycloak:
             issuer-uri: http://localhost:9999/auth/realms/master
         registration:
+          authorization:
+            client-id: 8332b80b-9b0f-4d1e-a359-831369f16295
+            client-secret: 67cd660af15e85fce2b5d06573ea9fab6147bc8b846d3eda5e39967684808fbb
           keycloak:
             client-id: master-realm
             client-secret: 96ecc752-fd95-4ddf-a48b-8ed45dc1d280

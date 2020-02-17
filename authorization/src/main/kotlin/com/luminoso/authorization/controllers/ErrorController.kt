@@ -19,12 +19,12 @@ class ErrorController : ErrorController {
         return if (exception != null) {
             when (exception) {
                 is EmailNotVerifiedException -> ResponseEntity.status(HttpStatus.FORBIDDEN).body("Email not verified")
-                else -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.message)
+                else -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.message)
             }
         } else {
             when (request.getAttribute("javax.servlet.error.status_code")) {
                 401 -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null)
-                else -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null)
+                else -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null)
             }
         }
     }

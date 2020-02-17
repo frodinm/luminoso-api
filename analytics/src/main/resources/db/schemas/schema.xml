@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="1-analytics-schema" author="Fabrizio Rodin-Miron">
+        <!-- https://www.postgresql.org/docs/11/uuid-ossp.html -->
+        <sql>create extension if not exists "uuid-ossp";</sql>
+
+        <createTable tableName="users">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="uuid" type="UUID" defaultValue="uuid_generate_v4()" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="analytics">
+            <column name="analytics_user_id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="uuid" type="UUID" defaultValue="uuid_generate_v4()" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="analytics" baseColumnNames="analytics_user_id"
+                                 constraintName="analytics_fk_1"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+
+        <createTable tableName="agents">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="analytics_id" type="int">
+                <constraints nullable="false" />
+            </column>
+            <column name="uuid" type="UUID" defaultValue="uuid_generate_v4()" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="agent_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="agent_version" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="device_brand" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="device_class" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="device_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="operating_system_class" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="operating_system_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="operating_system_version" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="agents" baseColumnNames="analytics_id"
+                                         constraintName="agents_fk_1"
+                                         referencedTableName="analytics"
+                                         referencedColumnNames="analytics_user_id"/>
+
+        <createTable tableName="events">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="agent_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uuid" type="UUID" defaultValue="uuid_generate_v4()" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="agent_events">
+            <column name="agent_id" type="int"/>
+            <column name="event_id" type="int"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="agent_events" baseColumnNames="agent_id"
+                                 constraintName="agent_events_fk_1"
+                                 referencedTableName="agents"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="agent_events" baseColumnNames="event_id"
+                                 constraintName="agent_events_fk_2"
+                                 referencedTableName="events"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="events" baseColumnNames="agent_id"
+                                 constraintName="events_agent_fk_1"
+                                 referencedTableName="agents"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

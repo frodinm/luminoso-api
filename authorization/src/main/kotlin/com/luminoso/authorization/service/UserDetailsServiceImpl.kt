@@ -14,10 +14,12 @@ class UserDetailsServiceImpl(private val repository: UserRepository) : UserDetai
 
     @Transactional
     override fun loadUserByUsername(username: String): UserDetails {
-        val user = repository.findByUserName(username) ?: throw UsernameNotFoundException("Username or password wrong")
-        if (!user.emailVerified) {
-            throw EmailNotVerifiedException("UserEntity email not verified")
+        val user = if(username.contains("@")) {
+            repository.findByEmail(username) ?: throw UsernameNotFoundException("Email or password wrong")
+        } else {
+            repository.findByUserName(username) ?: throw UsernameNotFoundException("Username or password wrong")
         }
+
         // Throws Exception if any of authorization values return false
         AccountStatusUserDetailsChecker().check(user)
         return user

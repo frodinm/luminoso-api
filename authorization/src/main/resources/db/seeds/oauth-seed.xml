@@ -15,43 +15,62 @@
             <column name="refresh_token_validity">864000000</column>
             <column name="resource_ids">oauth2-resource</column>
             <column name="authorized_grant_types">authorization_code,password,refresh_token</column>
-            <column name="additional_information">{"description":"Luminoso web app public client"}</column>
+            <column name="additional_information">{"description":"Web app public client"}</column>
         </insert>
 
         <insert tableName="oauth_client_details">
             <column name="client_id">302a4c05-82ca-4c38-9354-6ba720b1907d</column>
             <column name="client_secret">{noop}</column>
-            <column name="web_server_redirect_uri">https://localhost:5000/oauth2/redirect</column>
             <column name="scope">read_profile,update_profile</column>
             <column name="access_token_validity">3600</column>
             <column name="refresh_token_validity">864000000</column>
             <column name="resource_ids">oauth2-resource</column>
             <column name="authorized_grant_types">password,refresh_token</column>
-            <column name="additional_information">{"description":"Luminoso ios public client"}</column>
+            <column name="additional_information">{"description":"Ios public client"}</column>
         </insert>
 
         <insert tableName="oauth_client_details">
-            <column name="client_id">302a4c05-82ca-4c38-9354-6ba720b1907d</column>
+            <column name="client_id">3478cb08-1cb6-42d9-a2d2-508e2fcb2588</column>
             <column name="client_secret">{noop}</column>
-            <column name="web_server_redirect_uri">https://localhost:5000/oauth2/redirect</column>
             <column name="scope">read_profile,update_profile</column>
             <column name="access_token_validity">3600</column>
             <column name="refresh_token_validity">864000000</column>
             <column name="resource_ids">oauth2-resource</column>
             <column name="authorized_grant_types">password,refresh_token</column>
-            <column name="additional_information">{"description":"Luminoso ios public client"}</column>
+            <column name="additional_information">{"description":"Android public client"}</column>
         </insert>
 
         <insert tableName="oauth_client_details">
-            <column name="client_id">302a4c05-82ca-4c38-9354-6ba720b1907d</column>
-            <column name="client_secret">{noop}</column>
-            <column name="web_server_redirect_uri">https://localhost:5000/oauth2/redirect</column>
+            <column name="client_id">8332b80b-9b0f-4d1e-a359-831369f16295</column>
+            <column name="client_secret">{bcrypt}$2a$12$/NM6O6q/BIvK3rXCJWA1.u/eGSld73Lrfkc9.YTRvadcfb1CbyyhO</column>
             <column name="scope">read_profile,update_profile</column>
             <column name="access_token_validity">3600</column>
             <column name="refresh_token_validity">864000000</column>
             <column name="resource_ids">oauth2-resource</column>
-            <column name="authorized_grant_types">password,refresh_token</column>
-            <column name="additional_information">{"description":"Luminoso ios public client"}</column>
+            <column name="authorized_grant_types">client_credentials</column>
+            <column name="additional_information">{"description":"User management resource client"}</column>
+        </insert>
+
+        <insert tableName="oauth_client_details">
+            <column name="client_id">19828b9c-61aa-4288-8644-fc890187c71e</column>
+            <column name="client_secret">{bcrypt}$2a$12$zy6iSVjcPysUZF61h.S2jeHoXF2d/C.F.vpkWFgM/yfnetramSI4G</column>
+            <column name="scope">read_profile,update_profile</column>
+            <column name="access_token_validity">3600</column>
+            <column name="refresh_token_validity">864000000</column>
+            <column name="resource_ids">oauth2-resource</column>
+            <column name="authorized_grant_types">client_credentials</column>
+            <column name="additional_information">{"description":"Analytics resource client"}</column>
+        </insert>
+
+        <insert tableName="oauth_client_details">
+            <column name="client_id">9a268d33-8598-4b8f-9c2c-c13d54eb4bfe</column>
+            <column name="client_secret">{bcrypt}$2a$12$t6KWnFBEqB/Qc4DhVmkERe/HHV5B1FfX7CzetT7.bi3PpuIlvQ3n6</column>
+            <column name="scope">read_profile,update_profile</column>
+            <column name="access_token_validity">3600</column>
+            <column name="refresh_token_validity">864000000</column>
+            <column name="resource_ids">oauth2-resource</column>
+            <column name="authorized_grant_types">client_credentials</column>
+            <column name="additional_information">{"description":"Communications resource client"}</column>
         </insert>
 
         <insert tableName="permission">
@@ -103,8 +122,8 @@
             <column name="username">frodinm</column>
             <column name="first_name">Fabrizio</column>
             <column name="last_name">Rodin-Miron</column>
-            <column name="email">fabrizio.rm@skylow.io</column>
-            <column name="password">{bcrypt}$2a$12$/gpvNt92RXNpJx52vC3F4.FPGvo4auNNRxAFPIg/2tK6gOUkguX9G</column>
+            <column name="email">fabrizio1197@gmail.com</column>
+            <column name="password">{bcrypt}$2a$10$XBHmI/Ku6njCN4Es0TKeje1iyTLjdz9NVA4t0PP/XeE4RcQNV1evm</column>
             <column name="provider_id">1234</column>
             <column name="email_verified">true</column>
             <column name="enabled">true</column>

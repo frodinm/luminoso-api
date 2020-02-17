@@ -8,7 +8,7 @@ import com.luminoso.authorization.models.entities.security.user.UserEntity
 import com.luminoso.authorization.models.pojo.User
 
 fun UserEntity.toUser(): User {
-    return User(username, firstName, lastName, email, password, "")
+    return User(uuid, username, firstName, lastName, email, password, "")
 }
 
 fun UserEntity.toAuthUser(): AuthUser {

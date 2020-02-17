@@ -47,12 +47,12 @@ class OAuth2UserService(private val getOauth2UserInfoUseCase: IGetOauth2UserInfo
 
     private fun createUser(oauth2UserInfo: OAuth2UserInfo): Mono<UserEntity> {
         val user = User(
-            "${oauth2UserInfo.firstName()}_${oauth2UserInfo.lastName()}",
-            oauth2UserInfo.firstName(),
-            oauth2UserInfo.lastName(),
-            oauth2UserInfo.getEmail(),
-            "",
-            oauth2UserInfo.getImageUrl())
+            username = "${oauth2UserInfo.firstName()}_${oauth2UserInfo.lastName()}",
+            firstName = oauth2UserInfo.firstName(),
+            lastName = oauth2UserInfo.lastName(),
+            email = oauth2UserInfo.getEmail(),
+            password = "",
+            picture = oauth2UserInfo.getImageUrl())
         return createUserUseCase.sso(user)
     }
 }

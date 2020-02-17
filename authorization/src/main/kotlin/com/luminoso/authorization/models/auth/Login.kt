@@ -1,4 +1,4 @@
-package com.luminoso.authorization.models.pojo.auth
+package com.luminoso.authorization.models.auth
 
 data class Login(
     val username: String,

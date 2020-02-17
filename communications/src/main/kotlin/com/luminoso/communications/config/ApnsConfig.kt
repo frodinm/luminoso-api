@@ -15,17 +15,17 @@ class ApnsConfig(private val environment: Environment) {
 
     @PostConstruct
     fun init() {
-        val profile = environment.activeProfiles[0]
+//        val profile = environment.activeProfiles[0]
 
-        val apnsServer = if(profile == "docker") {
-            ApnsClientBuilder.PRODUCTION_APNS_HOST
-        } else {
-            ApnsClientBuilder.DEVELOPMENT_APNS_HOST
-        }
+//        val apnsServer = if(profile == "docker") {
+//            ApnsClientBuilder.PRODUCTION_APNS_HOST
+//        } else {
+//            ApnsClientBuilder.DEVELOPMENT_APNS_HOST
+//        }
 
-        _apnsClient = ApnsClientBuilder()
-            .setApnsServer(apnsServer)
-//            .setClientCredentials() Requires membership to get certificate
-            .build()
+//        _apnsClient = ApnsClientBuilder()
+//            .setApnsServer(apnsServer)
+////            .setClientCredentials() Requires membership to get certificate
+//            .build()
     }
 }

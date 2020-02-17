@@ -1,20 +1,33 @@
 server:
   port: 1000
+  http2:
+    enabled: false
+  ssl:
+    enabled: false
+    key-store-type: PKCS12
+    key-store: classpath:keystore/keystore.p12
+    key-password: password
+    key-alias: jwt
+    key-store-password: password
 spring:
   application:
     name: gateway
   cloud:
     loadbalancer:
       ribbon:
-        enabled: true # Spring cloud load balancer isnt fetching latest instances after restart
+        enabled: false # Spring cloud load balancer isnt fetching latest instances after restart
     consul:
       discovery:
         service-name: ${spring.application.name}
         instance-id: ${spring.application.name}:${random.value}
+        register: false
     gateway:
+      httpclient:
+        ssl:
+          use-insecure-trust-manager: true
       discovery:
         locator:
-          enabled: true
+          enabled: false
           lower-case-service-id: true
       metrics:
         enabled: true

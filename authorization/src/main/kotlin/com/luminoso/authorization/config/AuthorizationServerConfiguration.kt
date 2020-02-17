@@ -16,6 +16,8 @@ import org.springframework.security.oauth2.provider.ClientDetailsService
 import org.springframework.security.oauth2.provider.OAuth2RequestFactory
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore
+import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory
+import java.security.KeyPair
 import javax.sql.DataSource
 
 
@@ -29,9 +31,16 @@ class AuthorizationServerConfiguration(
     private val clientDetailsService: ClientDetailsService) : AuthorizationServerConfigurer {
 
     @Bean
+    fun keypair(): KeyPair {
+        val ksFile = ClassPathResource("/keystore/keystore.p12")
+        val ksFactory = KeyStoreKeyFactory(ksFile as Resource, "password".toCharArray())
+        return ksFactory.getKeyPair("jwt")
+    }
+
+    @Bean
     fun jwtAccessTokenConverter(): JwtAccessTokenConverter {
         val converter = EnhancedJwtTokenConverter()
-        converter.setSigningKey("1234")
+        converter.setKeyPair(keypair())
         return converter
     }
 
@@ -49,7 +58,10 @@ class AuthorizationServerConfiguration(
     }
 
     override fun configure(security: AuthorizationServerSecurityConfigurer) {
-        security.checkTokenAccess("isAuthenticated()").tokenKeyAccess("permitAll()").sslOnly()
+        security
+            .checkTokenAccess("isAuthenticated()")
+            .tokenKeyAccess("permitAll()")
+//            .sslOnly()
     }
 
     override fun configure(clients: ClientDetailsServiceConfigurer) {

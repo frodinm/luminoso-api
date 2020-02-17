@@ -37,7 +37,7 @@ class ControllerGlobalErrorHandler {
             is BadCredentialsException -> getErrorResponseEntity(ex, BAD_REQUEST)
             is UserAlreadyExistException -> getErrorResponseEntity(ex, CONFLICT)
             is EmailNotVerifiedException -> getErrorResponseEntity(ex, UNAUTHORIZED)
-            else -> getErrorResponseEntity(ex, INTERNAL_SERVER_ERROR)
+            else -> getErrorResponseEntity(ex, UNAUTHORIZED)
         }
     }
 

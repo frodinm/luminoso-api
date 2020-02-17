@@ -1,6 +1,6 @@
 //package com.luminoso.authorization.usecases.security.impl
 //
-//import com.luminoso.authorization.models.pojo.auth.Login
+//import com.luminoso.authorization.models.auth.Login
 //import com.luminoso.authorization.usecases.security.ITokenProviderUseCase
 //import org.springframework.security.authentication.AuthenticationManager
 //import org.springframework.security.authentication.UsernamePasswordAuthenticationToken

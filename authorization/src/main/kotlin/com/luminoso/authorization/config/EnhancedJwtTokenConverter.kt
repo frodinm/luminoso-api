@@ -1,5 +1,6 @@
 package com.luminoso.authorization.config
 
+import com.luminoso.authorization.models.entities.security.user.UserEntity
 import com.luminoso.authorization.models.pojo.User
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken
 import org.springframework.security.oauth2.common.OAuth2AccessToken
@@ -13,11 +14,11 @@ class EnhancedJwtTokenConverter : JwtAccessTokenConverter() {
 
         val info = LinkedHashMap(accessToken.additionalInformation)
 
-        if(authentication.principal is User){
-            val user: User = authentication.principal as User
+        if(authentication.principal is UserEntity){
+            val user: UserEntity = authentication.principal as UserEntity
 
             info["client_id"] = authentication.oAuth2Request.clientId
-            info["sub"] = user
+            info["sub"] = user.uuid.toString()
             info["user_name"] = user.username
             info["email"] = user.email
         }

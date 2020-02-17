@@ -1,7 +1,7 @@
 package com.luminoso.authorization.controllers
 
 import com.luminoso.authorization.enums.TokenStatus
-import com.luminoso.authorization.models.pojo.auth.ResendToken
+import com.luminoso.authorization.models.auth.ResendToken
 import com.luminoso.authorization.usecases.verification.ICreateVerificationTokenUseCase
 import com.luminoso.authorization.usecases.verification.IValidateVerificationTokenUseCase
 import org.slf4j.LoggerFactory

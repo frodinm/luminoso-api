@@ -1,8 +1,17 @@
 server:
   port: 0
+  http2:
+    enabled: true
+  ssl:
+    enabled: false
+    key-store-type: PKCS12
+    key-store: classpath:keystore/keystore.p12
+    key-password: password
+    key-alias: jwt
+    key-store-password: password
 spring:
   application:
-    name: luminoso-communications
+    name: communications
   cloud:
     consul:
       discovery:
@@ -10,11 +19,31 @@ spring:
         instance-id: ${spring.application.name}:${random.value}
   security:
     oauth2:
+      client:
+        registration:
+          authorization:
+            client-id: 9a268d33-8598-4b8f-9c2c-c13d54eb4bfe
+            client-secret: 9b7c1f853863fc3878ac5ade53fd592dd6dffd1231fc59c2585a7e4827be7cb3
+
       resourceserver:
         jwt:
-          jwk-set-uri: http://localhost:8080/auth/realms/dev/protocol/openid-connect/certs
-          issuer-uri: http://localhost:8080/auth/realms/dev
-          public-key-location: client.pub
+          jwk-set-uri: https://localhost:8443/.well-known/jwks.json
+          issuer-uri: https://localhost:8443
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/master
+    username: admin
+    password: admin
+  liquibase:
+    change-log: classpath:/db/liquidbase-changelog.xml
+    enabled: false
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
+    properties:
+      hibernate.temp.use_jdbc_metadata_defaults: false
+  sleuth:
+    async:
+      enabled: false
   zipkin:
     service:
       name: ${spring.application.name}
@@ -24,17 +53,6 @@ spring:
     port: 2525
     username: 0cda70a51c3d09 # Requires creds
     password: c8da9c4805a6d8
-keycloak:
-  realm: dev
-  auth-server-url: http://localhost:8080/auth
-  ssl-required: external
-  resource: luminoso-communications
-  credentials:
-    secret: b776e4d6-d686-48cc-bf9f-56bd214a6941
-  public-client: false
-  verify-token-audience: true
-  use-resource-role-mappings: true
-  principal-attribute: preferred_username
 management:
   endpoints:
     web:

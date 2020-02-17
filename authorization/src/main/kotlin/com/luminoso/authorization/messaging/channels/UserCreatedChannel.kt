@@ -1,6 +1,7 @@
 package com.luminoso.authorization.messaging.channels
 
 import org.springframework.cloud.stream.annotation.Output
+import org.springframework.messaging.MessageChannel
 import org.springframework.messaging.SubscribableChannel
 
 interface UserCreatedChannel {
@@ -13,5 +14,5 @@ interface UserCreatedChannel {
      * @return input channel.
      */
     @Output(OUTPUT)
-    fun output(): SubscribableChannel
+    fun output(): MessageChannel
 }

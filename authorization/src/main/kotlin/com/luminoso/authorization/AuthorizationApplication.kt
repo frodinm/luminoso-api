@@ -22,30 +22,30 @@ class AuthorizationApplication {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder()
     }
 
-    @Bean
-    fun servletContainer(): ServletWebServerFactory {
-        val tomcat = object : TomcatServletWebServerFactory() {
-            override fun postProcessContext(context: Context) {
-                val securityConstraint = SecurityConstraint()
-                securityConstraint.userConstraint = "CONFIDENTIAL"
-                val collection = SecurityCollection()
-                collection.addPattern("/*")
-                securityConstraint.addCollection(collection)
-                context.addConstraint(securityConstraint)
-            }
-        }
-        tomcat.addAdditionalTomcatConnectors(redirectConnector())
-        return tomcat
-    }
-
-    private fun redirectConnector(): Connector {
-        val connector = Connector("org.apache.coyote.http11.Http11NioProtocol")
-        connector.scheme = "http"
-        connector.port = 8080
-        connector.secure = false
-        connector.redirectPort = 8443
-        return connector
-    }
+//    @Bean
+//    fun servletContainer(): ServletWebServerFactory {
+//        val tomcat = object : TomcatServletWebServerFactory() {
+//            override fun postProcessContext(context: Context) {
+//                val securityConstraint = SecurityConstraint()
+//                securityConstraint.userConstraint = "CONFIDENTIAL"
+//                val collection = SecurityCollection()
+//                collection.addPattern("/*")
+//                securityConstraint.addCollection(collection)
+//                context.addConstraint(securityConstraint)
+//            }
+//        }
+//        tomcat.addAdditionalTomcatConnectors(redirectConnector())
+//        return tomcat
+//    }
+//
+//    private fun redirectConnector(): Connector {
+//        val connector = Connector("org.apache.coyote.http11.Http11NioProtocol")
+//        connector.scheme = "http"
+//        connector.port = 8080
+//        connector.secure = false
+//        connector.redirectPort = 1200
+//        return connector
+//    }
 }
 
 fun main(args: Array<String>) {

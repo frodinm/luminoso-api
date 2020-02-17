@@ -1,6 +1,6 @@
 package com.luminoso.authorization.usecases.security
 
-import com.luminoso.authorization.models.pojo.auth.Login
+import com.luminoso.authorization.models.auth.Login
 import org.springframework.security.core.Authentication
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken
 import org.springframework.security.oauth2.common.OAuth2AccessToken
