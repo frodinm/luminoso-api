@@ -1,7 +1,7 @@
 package com.luminoso.authorization.models.entities.security
 
-import com.luminoso.authorization.models.entities.NonGeneratedIdBaseEntity
 import com.luminoso.authorization.models.entities.security.user.UserEntity
+import com.luminoso.commonjpa.entities.NonGeneratedIdBaseEntity
 import java.util.*
 import javax.persistence.*
 

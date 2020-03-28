@@ -4,7 +4,7 @@ import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
 
 plugins {
     base
-    id("org.springframework.boot") version "2.2.4.RELEASE"  apply false
+    id("org.springframework.boot") version "2.2.5.RELEASE"  apply false
     id("io.spring.dependency-management") version "1.0.9.RELEASE"  apply false
     id("org.asciidoctor.convert") version "1.5.8"  apply false
     kotlin("jvm") version "1.3.61"  apply false
@@ -12,7 +12,7 @@ plugins {
 }
 
 allprojects {
-    group = "com.frodinm "
+    group = "com.luminoso"
     version = "0.0.1"
 
     repositories {
@@ -21,8 +21,7 @@ allprojects {
 }
 
 subprojects {
-
-    apply(plugin = "org.springframework.boot")
+//    apply(plugin = "org.springframework.boot")
 
     println("Enabling Kotlin Spring plugin in project ${project.name}...")
     apply(plugin = "org.jetbrains.kotlin.plugin.spring")

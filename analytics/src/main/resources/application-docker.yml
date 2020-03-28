@@ -2,7 +2,7 @@ server:
   port: 0
 spring:
   application:
-    name: candidate-management
+    name: analytics
   cloud:
     consul:
       discovery:
@@ -12,9 +12,12 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: http://keycloak:8080/auth/realms/soullabs/protocol/openid-connect/certs
-          issuer-uri: http://keycloak:8080/auth/realms/soullabs
-          public-key-location: client.pub
+          jwk-set-uri: http://authorization:1000/authorization/.well-known/jwks.json
+          issuer-uri: http://authorization:1000/authorization
+        apiKey:
+          client-id: 19828b9c-61aa-4288-8644-fc890187c71e
+          client-secret: e6d5957f3a254bae2d05f31617d94dc68559431c50d3f1ffbf3136b2b5cbfcc7
+          introspection-uri: http://authorization:1000/authorization/oauth/apikey/introspect
   zipkin:
     base-url: http://zipkin:9411
     service:
@@ -22,22 +25,11 @@ spring:
     enabled: false
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://candidate-management-db:5432/master
+    url: jdbc:postgresql://analytics-db:5432/master
     username: admin
     password: admin
   liquibase:
     change-log: classpath:/db/liquidbase-changelog.xml
-keycloak:
-  realm: soullabs
-  auth-server-url: http://keycloak:8080/auth
-  ssl-required: external
-  resource: ${spring.application.name}
-  credentials:
-    secret: 53bc798a-0fc3-4000-b1bf-12f26642ab6a
-  public-client: false
-  verify-token-audience: true
-  use-resource-role-mappings: true
-  principal-attribute: preferred_username
 management:
   endpoints:
     web:

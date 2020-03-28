@@ -19,20 +19,19 @@ spring:
         instance-id: ${spring.application.name}:${random.value}
   security:
     oauth2:
-      client:
-        registration:
-          authorization:
-            client-id: 19828b9c-61aa-4288-8644-fc890187c71e
-            client-secret: e6d5957f3a254bae2d05f31617d94dc68559431c50d3f1ffbf3136b2b5cbfcc7
       resourceserver:
         jwt:
           jwk-set-uri: http://localhost:1000/authorization/.well-known/jwks.json
           issuer-uri: http://localhost:1000/authorization
+        apiKey:
+          client-id: 19828b9c-61aa-4288-8644-fc890187c71e
+          client-secret: e6d5957f3a254bae2d05f31617d94dc68559431c50d3f1ffbf3136b2b5cbfcc7
+          introspection-uri: http://localhost:1000/authorization/oauth/apikey/introspect
   sleuth:
     async:
       enabled: false
   zipkin:
-    enabled: true
+    enabled: false
     service:
       name: ${spring.application.name}
   rabbitmq:

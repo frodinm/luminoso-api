@@ -260,84 +260,134 @@
                                  referencedTableName="users"
                                  referencedColumnNames="id"/>
     </changeSet>
-<!--    <changeSet id="3-oauth-schema" author="Fabrizio Rodin-Miron">-->
-<!--        <createTable tableName="oauth_client_token">-->
-<!--            <column name="authentication_id" type="varchar(256)">-->
-<!--                <constraints primaryKey="true" nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="uuid" type="UUID" defaultValue="uuid_generate_v4()" >-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="token_id" type="varchar(256)">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="token" type="longvarbinary">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="user_name" type="varchar(256)">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="client_id" type="varchar(256)">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="updated_at" type="timestamp" defaultValue="now()">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="created_at" type="timestamp" defaultValue="now()">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--        </createTable>-->
-<!--        <createTable tableName="oauth_access_token">-->
-<!--            <column name="authentication_id" type="varchar(256)">-->
-<!--                <constraints primaryKey="true"/>-->
-<!--            </column>-->
-<!--            <column name="uuid" type="UUID" defaultValue="uuid_generate_v4()" >-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="token_id" type="varchar(256)">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="token" type="longvarbinary">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="user_name" type="varchar(256)">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="client_id" type="varchar(256)">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="authentication" type="longvarbinary">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="refresh_token" type="varchar(256)">-->
-<!--                <constraints unique="true" nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="updated_at" type="timestamp" defaultValue="now()">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="created_at" type="timestamp" defaultValue="now()">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--        </createTable>-->
-<!--        <createTable tableName="oauth_refresh_token">-->
-<!--            <column name="token_id" type="varchar(256)">-->
-<!--                <constraints unique="true" nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="uuid" type="UUID" defaultValue="uuid_generate_v4()" >-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="token" type="longvarbinary">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="authentication" type="longvarbinary">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="updated_at" type="timestamp" defaultValue="now()">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="created_at" type="timestamp" defaultValue="now()">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--        </createTable>-->
-<!--    </changeSet>-->
+    <changeSet id="3-oauth-schema" author="Fabrizio Rodin-Miron">
+        <createTable tableName="organization">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="uuid" type="UUID" defaultValue="uuid_generate_v4()" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="token_id" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_name" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="client_id" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="organization_user">
+            <column name="organization_id" type="int">
+                <constraints nullable="false" />
+            </column>
+            <column name="user_id" type="int">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="organization_user" baseColumnNames="organization_id"
+                                 constraintName="organization_user_fk_1"
+                                 referencedTableName="organization"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="organization_user" baseColumnNames="user_id"
+                                 constraintName="organization_user_fk_2"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+
+        <createTable tableName="collaborators">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="uuid" type="UUID" defaultValue="uuid_generate_v4()" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="administrator" type="bool" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="organization_collaborators">
+            <column name="organization_id" type="int">
+                <constraints nullable="false" />
+            </column>
+            <column name="collaborator_id" type="int">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="organization_collaborators" baseColumnNames="organization_id"
+                                 constraintName="organization_collaborators_fk_1"
+                                 referencedTableName="organization"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="organization_collaborators" baseColumnNames="collaborator_id"
+                                 constraintName="organization_collaborators_fk_2"
+                                 referencedTableName="collaborators"
+                                 referencedColumnNames="id"/>
+
+        <createTable tableName="projects">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="uuid" type="UUID" defaultValue="uuid_generate_v4()" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="api_key">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="uuid" type="UUID" defaultValue="uuid_generate_v4()" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="token_id" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="token" type="longvarbinary">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_name" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="client_id" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp" defaultValue="now()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>

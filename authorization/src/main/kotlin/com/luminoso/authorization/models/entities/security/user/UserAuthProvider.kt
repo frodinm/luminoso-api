@@ -1,8 +1,8 @@
 package com.luminoso.authorization.models.entities.security.user
 
 import com.luminoso.authorization.enums.AuthProvider
-import com.luminoso.authorization.models.entities.GeneratedIdBaseEntity
-import com.luminoso.authorization.models.entities.PostgreSQLEnumType
+import com.luminoso.commonjpa.entities.GeneratedIdBaseEntity
+import com.luminoso.commonjpa.entities.PostgreSQLEnumType
 import org.hibernate.annotations.Type
 import org.hibernate.annotations.TypeDef
 import javax.persistence.*

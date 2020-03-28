@@ -20,8 +20,8 @@ data class AgentEntity(
     @JoinColumn(name = "analytics_id")
     var analytics: AnalyticsEntity? = null
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
-    @JoinTable(name = "agent_events", joinColumns = [JoinColumn(name = "agent_id")], inverseJoinColumns = [JoinColumn(name = "event_id", referencedColumnName = "id")])
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "agent_events", joinColumns = [JoinColumn(name = "agent_id")], inverseJoinColumns = [JoinColumn(name = "event_id")])
     val events: MutableSet<EventsEntity> = mutableSetOf()
 
     fun addEvent(event: EventsEntity) {

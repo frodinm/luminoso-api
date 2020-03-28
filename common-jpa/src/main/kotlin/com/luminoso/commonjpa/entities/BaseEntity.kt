@@ -1,4 +1,4 @@
-package com.luminoso.authorization.models.entities
+package com.luminoso.commonjpa.entities
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import org.hibernate.annotations.UpdateTimestamp

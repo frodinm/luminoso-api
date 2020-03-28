@@ -1,4 +1,4 @@
-package com.luminoso.authorization.models.entities
+package com.luminoso.commonjpa.entities
 
 import org.hibernate.HibernateException
 import org.hibernate.engine.spi.SharedSessionContractImplementor

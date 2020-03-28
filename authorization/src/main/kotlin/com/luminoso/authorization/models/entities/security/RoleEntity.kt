@@ -1,6 +1,6 @@
 package com.luminoso.authorization.models.entities.security
 
-import com.luminoso.authorization.models.entities.GeneratedIdBaseEntity
+import com.luminoso.commonjpa.entities.GeneratedIdBaseEntity
 import javax.persistence.*
 
 @Entity

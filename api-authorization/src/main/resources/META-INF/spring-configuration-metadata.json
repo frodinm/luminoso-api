@@ -1,0 +1,30 @@
+{
+  "groups" : [
+    {
+      "name": "spring.security.oauth2.resourceserver.apiKey",
+      "type": "java.lang.String",
+      "description": "Api Key Oauth2 configuration",
+      "sourceType": "com.luminoso.apiauthorization.core.autoconfigure.OAuth2ResourceServerApiKeyProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "spring.security.oauth2.resourceserver.apiKey.client-id",
+      "type": "java.lang.String",
+      "description": "Resource server oauth2 client id used to get jwt credential flow access token",
+      "sourceType": "com.luminoso.apiauthorization.core.autoconfigure.OAuth2ResourceServerApiKeyProperties$ApiKey"
+    },
+    {
+      "name": "spring.security.oauth2.resourceserver.apiKey.client-secret",
+      "type": "java.lang.String",
+      "description": "Resource server oauth2 client secret used with clientId to get jwt credential flow access token",
+      "sourceType": "com.luminoso.apiauthorization.core.autoconfigure.OAuth2ResourceServerApiKeyProperties$ApiKey"
+    },
+    {
+      "name": "spring.security.oauth2.resourceserver.apiKey.introspection-uri",
+      "type": "java.lang.String",
+      "description": "Zuccini api client id",
+      "sourceType": "com.luminoso.apiauthorization.core.autoconfigure.OAuth2ResourceServerApiKeyProperties$ApiKey"
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 package com.luminoso.authorization.models.entities.security.user
 
-import com.luminoso.authorization.models.entities.GeneratedIdBaseEntity
 import com.luminoso.authorization.models.entities.security.PasswordResetToken
 import com.luminoso.authorization.models.entities.security.RoleEntity
 import com.luminoso.authorization.models.entities.security.VerificationToken
+import com.luminoso.commonjpa.entities.GeneratedIdBaseEntity
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails

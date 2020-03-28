@@ -37,7 +37,7 @@ spring:
   zipkin:
     service:
       name: ${spring.application.name}
-    enabled: true
+    enabled: false
 management:
   endpoints:
     web:

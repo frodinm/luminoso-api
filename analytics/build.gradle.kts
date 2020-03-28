@@ -10,7 +10,7 @@ plugins {
 
 group = "com.luminoso"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_11
+java.sourceCompatibility = JavaVersion.VERSION_13
 
 repositories {
     mavenCentral()
@@ -23,6 +23,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux")
 
     implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
+    implementation(project(":api-authorization"))
 
     implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.8")
     implementation("com.vladmihalcea:hibernate-types-52:2.9.3")
@@ -30,6 +31,7 @@ dependencies {
     implementation("org.liquibase:liquibase-core")
     runtimeOnly("org.postgresql:postgresql")
 
+    implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
     implementation("org.springframework.cloud:spring-cloud-starter-consul-discovery")
     implementation("org.springframework.cloud:spring-cloud-starter-sleuth")
     implementation("org.springframework.cloud:spring-cloud-starter-zipkin")
@@ -60,13 +62,8 @@ dependencyManagement {
     }
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
-}
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "1.8"
-    }
-}
+//kotlin.sourceSets {
+//    main {
+//        kotlin.srcDir(project(":api-authorization").file("src/main/kotlin"))
+//    }
+//}

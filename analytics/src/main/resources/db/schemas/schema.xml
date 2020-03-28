@@ -85,9 +85,9 @@
         </createTable>
 
         <addForeignKeyConstraint baseTableName="agents" baseColumnNames="analytics_id"
-                                         constraintName="agents_fk_1"
-                                         referencedTableName="analytics"
-                                         referencedColumnNames="analytics_user_id"/>
+                                 constraintName="agents_fk_1"
+                                 referencedTableName="analytics"
+                                 referencedColumnNames="analytics_user_id"/>
 
         <createTable tableName="events">
             <column name="id" type="int" autoIncrement="true">

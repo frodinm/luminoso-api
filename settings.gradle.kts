@@ -5,6 +5,8 @@ pluginManagement {
 }
 rootProject.name = "luminoso-api"
 
+include(":api-authorization")
+include(":common-jpa")
 include("analytics")
 include("authorization")
 include("cdn")

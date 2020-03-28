@@ -10,7 +10,7 @@ data class EventsEntity(
     val value: String
 ): GeneratedIdBaseEntity(){
 
-    @ManyToMany(mappedBy = "events",fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "events",fetch = FetchType.LAZY)
     val agents: MutableSet<AgentEntity> = mutableSetOf()
 
 }

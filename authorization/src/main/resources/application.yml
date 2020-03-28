@@ -21,7 +21,7 @@ spring:
     async:
       enabled: false
   zipkin:
-    enabled: true
+    enabled: false
     service:
       name: ${spring.application.name}
   rabbitmq:

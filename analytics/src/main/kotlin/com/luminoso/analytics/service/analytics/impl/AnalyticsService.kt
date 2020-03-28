@@ -32,11 +32,14 @@ class AnalyticsService(
             val userEntity = userRepository.findByUuid(UUID.fromString(principalId))
 
             agentEntity.analytics = userEntity.analytics
-            agentEntity.addEvent(eventsEntity)
+//            agentEntity.addEvent(eventsEntity)
 
             agentRepository.save(agentEntity)
 
+
             EventResponse(eventsEntity.uuid)
+        }.doOnSuccess {
+
         }
     }
 

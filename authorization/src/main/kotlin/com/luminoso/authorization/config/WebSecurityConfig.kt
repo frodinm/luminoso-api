@@ -1,10 +1,12 @@
 package com.luminoso.authorization.config
 
+import com.luminoso.authorization.filters.APIKeyAuthFilter
 import com.luminoso.authorization.repository.cookies.impl.CookieOAuth2AuthorizationRequestRepository
 import com.luminoso.authorization.service.OAuth2UserService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
@@ -12,7 +14,7 @@ import org.springframework.security.oauth2.client.web.HttpSessionOAuth2Authoriza
 import javax.servlet.http.HttpServletResponse
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 class WebSecurityConfig(private val userOAuth2Service: OAuth2UserService,
                         private val cookieOAuth2AuthorizationRequestRepository: CookieOAuth2AuthorizationRequestRepository,
                         private val oAuth2AuthenticationSuccessHandler: OAuth2AuthenticationSuccessHandler,
@@ -24,14 +26,13 @@ class WebSecurityConfig(private val userOAuth2Service: OAuth2UserService,
     }
 
     override fun configure(http: HttpSecurity) {
-        http.httpBasic().disable()
+        http
             .csrf().disable()
             .authorizeRequests { configurer ->
                 configurer
                     .antMatchers("/admin/**").hasRole("ADMIN")
                     .antMatchers("/register").permitAll()
                     .antMatchers("/actuator/health").permitAll()
-                    .antMatchers("/oauth/**").permitAll()
                     .antMatchers("/error/**").permitAll()
                     .antMatchers("/.well-known/jwks.json").permitAll()
                     .anyRequest().authenticated()

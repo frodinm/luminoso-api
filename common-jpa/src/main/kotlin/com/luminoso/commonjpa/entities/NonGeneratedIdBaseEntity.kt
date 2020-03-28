@@ -1,4 +1,4 @@
-package com.luminoso.authorization.models.entities
+package com.luminoso.commonjpa.entities
 
 import com.luminoso.authorization.models.entities.BaseEntity
 import javax.persistence.Id
