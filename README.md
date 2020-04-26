@@ -1,3 +1,8 @@
+Api-authorization
+
+- Adds api key introspection endpoint within the SecurityFilterChain.
+- Auto configuration for resource servers in order to validate api keys.
+
 -- NimbusJwtDecoder has a RestOperations (RestTemplate) instance which needs to be replaced in order to work with https.
 - https://docs.spring.io/spring-security/site/docs/current/reference/html5/#oauth2resourceserver-jwt-decoder-dsl
 
