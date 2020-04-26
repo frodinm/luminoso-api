@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.luminoso.commonjpa.entities.security.resource
+package com.luminoso.apiauthorization.core.security.resource
 
 import com.luminoso.apiauthorization.core.security.access.ApiKeyAccessDeniedHandler
 import com.luminoso.apiauthorization.core.security.introspection.ApiKeyIntrospector
@@ -30,13 +30,10 @@ import org.springframework.security.config.annotation.web.HttpSecurityBuilder
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer
 import org.springframework.security.config.annotation.web.configurers.ExceptionHandlingConfigurer
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException
-import org.springframework.security.oauth2.server.resource.authentication.OpaqueTokenAuthenticationProvider
-import org.springframework.security.oauth2.server.resource.introspection.OpaqueTokenIntrospector
 import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationFilter
 import org.springframework.security.web.AuthenticationEntryPoint
 import org.springframework.security.web.access.AccessDeniedHandler
 import org.springframework.security.web.util.matcher.RequestMatcher
-import org.springframework.util.Assert
 import java.util.function.Supplier
 import javax.servlet.http.HttpServletRequest
 

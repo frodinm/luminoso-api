@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.luminoso.commonjpa.entities.security.web
+package com.luminoso.apiauthorization.core.security.web
 
 import org.springframework.security.authentication.AbstractAuthenticationToken
 import org.springframework.security.core.SpringSecurityCoreVersion

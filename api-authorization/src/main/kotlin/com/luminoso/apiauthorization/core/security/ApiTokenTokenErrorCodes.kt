@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.luminoso.commonjpa.entities.security
+package com.luminoso.apiauthorization.core.security
 
 /**
  * Standard error codes defined by the OAuth 2.0 Authorization Framework: Bearer Token Usage.

@@ -1,6 +1,6 @@
-package com.luminoso.commonjpa.entities.autoconfigure.servlet
+package com.luminoso.apiauthorization.core.autoconfigure.servlet
 
-import com.luminoso.commonjpa.entities.autoconfigure.OAuth2ResourceServerApiKeyProperties
+import com.luminoso.apiauthorization.core.autoconfigure.OAuth2ResourceServerApiKeyProperties
 import com.luminoso.apiauthorization.core.security.introspection.ApiKeyIntrospector
 import com.luminoso.apiauthorization.core.security.introspection.NimbusApiKeyIntrospector
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean

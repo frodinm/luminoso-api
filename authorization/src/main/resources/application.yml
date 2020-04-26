@@ -17,6 +17,7 @@ spring:
       discovery:
         service-name: ${spring.application.name}
         instance-id: ${spring.application.name}:${random.value}
+      enabled: true
   sleuth:
     async:
       enabled: false

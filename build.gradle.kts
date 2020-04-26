@@ -4,7 +4,7 @@ import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
 
 plugins {
     base
-    id("org.springframework.boot") version "2.2.5.RELEASE"  apply false
+    id("org.springframework.boot") version "2.2.6.RELEASE"  apply false
     id("io.spring.dependency-management") version "1.0.9.RELEASE"  apply false
     id("org.asciidoctor.convert") version "1.5.8"  apply false
     kotlin("jvm") version "1.3.61"  apply false

@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.luminoso.commonjpa.entities.autoconfigure.servlet
+package com.luminoso.apiauthorization.core.autoconfigure
 
-import com.luminoso.commonjpa.entities.autoconfigure.OAuth2ResourceServerApiKeyProperties
 import com.luminoso.apiauthorization.core.autoconfigure.servlet.OAuth2ResourceServerApiKeyConfiguration
 import com.luminoso.apiauthorization.core.security.introspection.ApiKeyIntrospector
 import com.luminoso.apiauthorization.core.security.web.ApiKeyAuthenticationToken

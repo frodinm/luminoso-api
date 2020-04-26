@@ -1,4 +1,4 @@
-package com.luminoso.commonjpa.entities.security.extensions
+package com.luminoso.apiauthorization.core.security.extensions
 
 import com.luminoso.apiauthorization.core.security.resource.OAuth2ApiKeyResourceServerConfigurer
 import org.springframework.context.ApplicationContext

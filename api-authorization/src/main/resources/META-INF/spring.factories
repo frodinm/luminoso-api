@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.luminoso.apiauthorization.core.autoconfigure.servlet.OAuth2ResourceServerApiKeyAutoConfiguration
+com.luminoso.apiauthorization.core.autoconfigure.OAuth2ResourceServerApiKeyAutoConfiguration

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.luminoso.commonjpa.entities.security.introspection
+package com.luminoso.apiauthorization.core.security.introspection
 
 import com.nimbusds.oauth2.sdk.TokenIntrospectionResponse
 import com.nimbusds.oauth2.sdk.TokenIntrospectionSuccessResponse
@@ -28,8 +28,6 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal
 import org.springframework.security.oauth2.server.resource.introspection.OAuth2IntrospectionClaimNames
 import org.springframework.security.oauth2.server.resource.introspection.OAuth2IntrospectionException
 import org.springframework.util.Assert
-import org.springframework.util.LinkedMultiValueMap
-import org.springframework.util.MultiValueMap
 import org.springframework.web.client.RestOperations
 import org.springframework.web.client.RestTemplate
 import java.net.URI
