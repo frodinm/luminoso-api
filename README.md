@@ -1,3 +1,7 @@
+Common jpa
+
+- Reusable hibernate base entities
+
 Api-authorization
 
 - Adds api key introspection endpoint within the SecurityFilterChain.
